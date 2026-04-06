@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>SHIN | 一杯に、魂を込めて。</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600;700;800&family=Zen+Kaku+Gothic+New:wght@300;400;500&family=Playfair+Display:ital,wght@0,700;1,400&family=Kaisei+Decol:wght@700&family=Zen+Brush+2&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600;700;800&family=Zen+Kaku+Gothic+New:wght@300;400;500&family=Playfair+Display:ital,wght@0,700;1,400&family=Kaisei+Decol:wght@700&family=Zen+Brush+2&family=Oswald:wght@700&family=Black+Han+Sans&family=Bebas+Neue&family=Teko:wght@600&family=Rajdhani:wght@700&family=Barlow+Condensed:wght@800&display=swap" rel="stylesheet">
 <style>
   :root {
     --cream: #FDF8F0;
@@ -157,6 +157,52 @@
     z-index: 2;
     padding: 0 48px 80px;
     max-width: 700px;
+  }
+
+  .hero-logo {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 32px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 0.1s;
+  }
+
+  .hero-logo-shin {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: clamp(56px, 10vw, 110px);
+    font-weight: 800;
+    color: var(--cream);
+    line-height: 1;
+    letter-spacing: 0.04em;
+  }
+
+  .hero-logo-circle {
+    width: clamp(48px, 7vw, 80px);
+    height: clamp(48px, 7vw, 80px);
+    background: #C0392B;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .hero-logo-circle span {
+    font-family: 'Zen Brush 2', serif;
+    font-size: clamp(26px, 4vw, 46px);
+    color: white;
+    line-height: 1;
+  }
+
+  .hero-logo-label {
+    font-size: clamp(11px, 1.4vw, 14px);
+    letter-spacing: 0.2em;
+    color: rgba(253,248,240,0.5);
+    font-family: 'Zen Kaku Gothic New', sans-serif;
+    font-weight: 300;
+    writing-mode: vertical-rl;
+    margin-left: 4px;
   }
 
   .hero-eyebrow {
@@ -760,6 +806,11 @@
   </div>
   <div class="bowl-shape"></div>
   <div class="hero-content">
+    <div class="hero-logo">
+      <div class="hero-logo-shin">SHIN</div>
+      <div class="hero-logo-circle"><span>新</span></div>
+      <div class="hero-logo-label">自家製麺</div>
+    </div>
     <div class="hero-eyebrow">Artisan Ramen · 職人ラーメン</div>
     <h1 class="hero-title">
       <span class="hero-small">一杯に</span>
