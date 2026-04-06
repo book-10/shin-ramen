@@ -3,21 +3,21 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>shin | 一杯に、魂を込めて。</title>
+<title>SHIN | 一杯に、魂を込めて。</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600;700;800&family=Zen+Kaku+Gothic+New:wght@300;400;500&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600;700;800&family=Zen+Kaku+Gothic+New:wght@300;400;500&family=Playfair+Display:ital,wght@0,700;1,400&family=Kaisei+Decol:wght@700&family=Zen+Brush+2&display=swap" rel="stylesheet">
 <style>
   :root {
-    --cream: #FDF6ED;
+    --cream: #FDF8F0;
     --warm-white: #FAF4E8;
-    --orange: #E8621A;
-    --orange-light: #F07A3A;
-    --orange-deep: #C44E0E;
-    --forest: #2D4A2D;
-    --forest-light: #3D6B3D;
-    --charcoal: #1A1A18;
-    --warm-gray: #6B6558;
-    --gold: #C8973A;
+    --orange: #F07030;
+    --orange-light: #F58A50;
+    --orange-deep: #D05A18;
+    --forest: #3A5C3A;
+    --forest-light: #4A7A4A;
+    --charcoal: #1E1C18;
+    --warm-gray: #7A7268;
+    --gold: #D4A040;
     --red-accent: #C0392B;
   }
 
@@ -96,9 +96,9 @@
     position: absolute;
     inset: 0;
     background:
-      radial-gradient(ellipse 60% 50% at 70% 40%, rgba(232,98,26,0.25) 0%, transparent 70%),
-      radial-gradient(ellipse 40% 60% at 20% 80%, rgba(45,74,45,0.3) 0%, transparent 60%),
-      linear-gradient(160deg, #0E0E0C 0%, #1A1810 40%, #231E14 100%);
+      radial-gradient(ellipse 70% 55% at 65% 35%, rgba(240,112,48,0.42) 0%, transparent 65%),
+      radial-gradient(ellipse 45% 40% at 15% 75%, rgba(212,160,64,0.22) 0%, transparent 55%),
+      linear-gradient(155deg, #100E0A 0%, #201608 45%, #281C0A 100%);
   }
 
   /* 蒸気アニメーション */
@@ -181,20 +181,41 @@
 
   .hero-title {
     font-family: 'Shippori Mincho', serif;
-    font-size: clamp(56px, 8vw, 96px);
-    font-weight: 800;
-    line-height: 1.05;
+    line-height: 1.0;
     color: var(--cream);
-    margin-bottom: 12px;
+    margin-bottom: 20px;
     opacity: 0;
     animation: fadeUp 0.8s ease forwards 0.5s;
+    display: flex;
+    align-items: baseline;
+    gap: 4px;
+    flex-wrap: wrap;
   }
 
-  .hero-title span {
-    color: var(--orange);
-    font-style: italic;
-    font-family: 'Playfair Display', serif;
-    font-size: 0.7em;
+  .hero-small {
+    font-size: clamp(22px, 3vw, 36px);
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    color: rgba(253,248,240,0.75);
+  }
+
+  .hero-kanji {
+    font-size: clamp(72px, 12vw, 130px);
+    font-weight: 400;
+    color: white;
+    line-height: 1;
+    letter-spacing: 0;
+    font-family: 'Zen Brush 2', serif;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: #C0392B;
+    border-radius: 50%;
+    width: clamp(110px, 18vw, 200px);
+    height: clamp(110px, 18vw, 200px);
+    flex-shrink: 0;
+    position: relative;
+    top: 0.05em;
   }
 
   .hero-sub {
@@ -353,7 +374,7 @@
 
   /* ===== メニュー ===== */
   .menu {
-    background: var(--charcoal);
+    background: #252018;
     padding: 120px 48px;
     position: relative;
     overflow: hidden;
@@ -521,7 +542,7 @@
 
   /* ===== 店舗情報 ===== */
   .info {
-    background: var(--forest);
+    background: #F2ECD8;
     padding: 100px 48px;
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -533,7 +554,7 @@
     font-family: 'Shippori Mincho', serif;
     font-size: 36px;
     font-weight: 700;
-    color: var(--cream);
+    color: var(--charcoal);
     margin-bottom: 32px;
   }
 
@@ -541,14 +562,14 @@
     display: flex;
     gap: 20px;
     padding: 16px 0;
-    border-bottom: 1px solid rgba(253,246,237,0.1);
+    border-bottom: 1px solid rgba(26,24,18,0.12);
     font-size: 14px;
   }
 
   .info-row:last-child { border-bottom: none; }
 
   .info-label {
-    color: rgba(253,246,237,0.4);
+    color: rgba(26,24,18,0.45);
     font-size: 11px;
     letter-spacing: 0.1em;
     min-width: 80px;
@@ -556,18 +577,22 @@
   }
 
   .info-value {
-    color: var(--cream);
+    color: var(--charcoal);
     line-height: 1.8;
     font-weight: 300;
   }
 
+  .info-value a {
+    color: var(--charcoal) !important;
+  }
+
   .map-placeholder {
-    background: rgba(0,0,0,0.2);
+    background: rgba(26,24,18,0.06);
     height: 280px;
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 1px solid rgba(253,246,237,0.1);
+    border: 1px solid rgba(26,24,18,0.15);
     position: relative;
     overflow: hidden;
   }
@@ -577,8 +602,8 @@
     position: absolute;
     inset: 0;
     background:
-      repeating-linear-gradient(0deg, transparent, transparent 39px, rgba(255,255,255,0.03) 39px, rgba(255,255,255,0.03) 40px),
-      repeating-linear-gradient(90deg, transparent, transparent 39px, rgba(255,255,255,0.03) 39px, rgba(255,255,255,0.03) 40px);
+      repeating-linear-gradient(0deg, transparent, transparent 39px, rgba(26,24,18,0.04) 39px, rgba(26,24,18,0.04) 40px),
+      repeating-linear-gradient(90deg, transparent, transparent 39px, rgba(26,24,18,0.04) 39px, rgba(26,24,18,0.04) 40px);
   }
 
   .map-pin {
@@ -605,7 +630,7 @@
   }
 
   .cta-banner::before {
-    content: 'shin';
+    content: 'SHIN';
     position: absolute;
     right: 40px;
     top: 50%;
@@ -717,7 +742,7 @@
 
 <!-- ナビ -->
 <nav>
-  <div class="nav-logo">shin</div>
+  <div class="nav-logo">SHIN</div>
   <ul class="nav-links">
     <li><a href="#concept">こだわり</a></li>
     <li><a href="#menu">メニュー</a></li>
@@ -737,7 +762,9 @@
   <div class="hero-content">
     <div class="hero-eyebrow">Artisan Ramen · 職人ラーメン</div>
     <h1 class="hero-title">
-      一杯に、<br><span>魂</span>を込めて。
+      <span class="hero-small">一杯に</span>
+      <span class="hero-kanji">魂</span>
+      <span class="hero-small">を込めて。</span>
     </h1>
     <p class="hero-sub">
       素材と向き合い、火と語らい、<br>
@@ -745,7 +772,7 @@
     </p>
     <a href="#menu" class="hero-cta">メニューを見る</a>
   </div>
-  <div class="hero-vertical">shin · 一杯に魂を込めて · artisan ramen · 横浜</div>
+  <div class="hero-vertical">SHIN · 一杯に魂を込めて · artisan ramen · 横浜</div>
 </section>
 
 <!-- コンセプト -->
@@ -754,18 +781,20 @@
     <p class="concept-label">Our Concept</p>
     <h2 class="concept-title">妥協しない素材と、<br>職人の技が宿る一杯。</h2>
     <p class="concept-text">
-      北海道産の昆布と九州産の豚骨を丸一日かけて炊き出したスープ。
-      小麦の香りを活かした自家製麺。ひとつひとつ、手を抜かない。
+      新機軸は大好き。でも、流行は追わない。<br>
+      和歌山・湯浅の無添加醤油、広島産の牡蠣ペースト——<br>
+      本物の素材だけが生む、唯一無二の一杯を追求しています。
     </p>
     <p class="concept-text">
-      それが「shin」の、変わらない約束です。
+      自家製麺・完全無化調。<br>
+      女性店主が、毎日丁寧に仕込んでいます。
     </p>
   </div>
   <div class="concept-visual reveal reveal-delay-2">
     <div class="concept-card">
       <div class="concept-card-num">01</div>
-      <div class="concept-card-title">毎朝5時からの仕込み</div>
-      <div class="concept-card-body">スープは毎日ゼロから。前日の残しは使わない。それがshinのルールです。</div>
+      <div class="concept-card-title">「おいしい」だけを、信じる。</div>
+      <div class="concept-card-body">流行でも権威でもなく、自分の舌とワクワクを頼りに作り続ける。それが店主・SHINのぶれない軸です。</div>
     </div>
   </div>
 </section>
@@ -781,54 +810,61 @@
   <div class="menu-grid">
     <div class="menu-item featured reveal">
       <span class="menu-badge">Signature</span>
-      <div class="menu-name">醤油らーめん</div>
-      <div class="menu-desc">鶏ガラと昆布の二重出汁に、自家製醤油ダレ。透明感のある黄金色のスープ。</div>
+      <div class="menu-name">湯浅醤油らーめん</div>
+      <div class="menu-desc">和歌山県産・国産丸大豆と小麦使用の無添加醤油をベースに、煮干しと背脂で深みを加えたshinの看板メニュー。</div>
       <div class="menu-price">¥980 <span>税込</span></div>
     </div>
     <div class="menu-item reveal reveal-delay-1">
-      <span class="menu-badge">Popular</span>
-      <div class="menu-name">濃厚豚骨</div>
-      <div class="menu-desc">18時間炊き込んだ白濁スープ。クリーミーながら後味すっきり。</div>
-      <div class="menu-price">¥1,050 <span>税込</span></div>
+      <span class="menu-badge">人気</span>
+      <div class="menu-name">牡蠣醤油らーめん</div>
+      <div class="menu-desc">広島産牡蠣のペーストをスープに溶かし込んだ、磯の香り豊かな一杯。唯一無二の味わい。</div>
+      <div class="menu-price">¥1,100 <span>税込</span></div>
     </div>
     <div class="menu-item reveal reveal-delay-2">
-      <span class="menu-badge">New</span>
-      <div class="menu-name">辣油つけ麺</div>
-      <div class="menu-desc">自家製辣油が香る濃厚つけ汁に、コシの強い太麺を合わせた一品。</div>
-      <div class="menu-price">¥1,150 <span>税込</span></div>
+      <span class="menu-badge">自家製麺</span>
+      <div class="menu-name">自家製麺について</div>
+      <div class="menu-desc">すべてのメニューに、毎日店内で打ち上げる自家製麺を使用。スープとの一体感を大切にしています。</div>
+      <div class="menu-price" style="font-size:14px;color:rgba(200,151,58,0.7)">完全無化調</div>
     </div>
+  </div>
+  <div class="reveal" style="margin-top:28px;padding:20px 24px;border:1px solid rgba(240,112,48,0.3);display:flex;align-items:flex-start;gap:14px;">
+    <span style="color:var(--orange);font-size:18px;flex-shrink:0;margin-top:1px;">※</span>
+    <p style="font-size:13px;color:rgba(253,248,240,0.65);line-height:1.8;font-weight:300;">
+      その日の仕入れ状況によって、提供できるメニューが異なる場合があります。<br>
+      最新の営業・メニュー情報は <a href="https://x.com/" target="_blank" style="color:var(--orange);text-decoration:none;">X（Twitter）</a> または <a href="https://www.instagram.com/" target="_blank" style="color:var(--orange);text-decoration:none;">Instagram</a> でご確認ください。
+    </p>
   </div>
 </section>
 
 <!-- こだわり -->
 <section class="features">
   <p class="section-label reveal" style="color:var(--orange)">Our Commitment</p>
-  <h2 class="section-title reveal reveal-delay-1" style="color:var(--charcoal)">shinのこだわり</h2>
+  <h2 class="section-title reveal reveal-delay-1" style="color:var(--charcoal)">SHINのこだわり</h2>
   <div class="features-grid">
     <div class="feature-item reveal reveal-delay-1">
       <div class="feature-num">01</div>
-      <div class="feature-title">国産素材100%</div>
-      <div class="feature-body">野菜・肉・麦、すべて産地を確認した国産素材のみを使用。安全と美味しさの両立にこだわります。</div>
+      <div class="feature-title">和歌山・湯浅の無添加醤油</div>
+      <div class="feature-body">国産丸大豆と小麦を使用した和歌山県産の無添加醤油を使用。添加物に頼らない、本来の醤油の旨みと香りがスープの骨格を作ります。</div>
     </div>
     <div class="feature-item reveal reveal-delay-2">
       <div class="feature-num">02</div>
-      <div class="feature-title">毎日手打ちの自家製麺</div>
-      <div class="feature-body">スープに合わせて製麺師が毎日打つ自家製麺。歯ごたえ・のど越しが別格です。</div>
+      <div class="feature-title">広島産 牡蠣ペースト</div>
+      <div class="feature-body">広島から直送した牡蠣のペーストをスープに溶かし込む、shin独自の手法。海の恵みが生む、他では味わえない奥行きのある風味。</div>
     </div>
     <div class="feature-item reveal reveal-delay-3">
       <div class="feature-num">03</div>
-      <div class="feature-title">添加物不使用</div>
-      <div class="feature-body">化学調味料・保存料は一切使用しません。素材本来のうまみだけで勝負します。</div>
+      <div class="feature-title">毎日打つ自家製麺</div>
+      <div class="feature-body">小麦の風味を活かした自家製麺を毎日店内で製麺。スープに合わせて配合を調整し、一体感のある食べ心地を追求しています。</div>
     </div>
     <div class="feature-item reveal reveal-delay-1">
       <div class="feature-num">04</div>
       <div class="feature-title">完全無化調</div>
-      <div class="feature-body">化学調味料（MSG）を一切使わず、素材の旨みだけで深みのあるスープを実現。食べ終わった後の「くどさ」がありません。</div>
+      <div class="feature-body">化学調味料を一切使用しません。素材本来の旨みだけで作るスープは、後味が清々しく、食べ終わった後もすっきり。</div>
     </div>
     <div class="feature-item reveal reveal-delay-2">
       <div class="feature-num">05</div>
-      <div class="feature-title">女性店主が作る、やさしい一杯</div>
-      <div class="feature-body">店主は女性。「女性やお子様にも気軽に入れるラーメン店を」という想いから生まれた、繊細で丁寧な味づくりが評判です。</div>
+      <div class="feature-title">流行より、自分の「好き」</div>
+      <div class="feature-body">女性店主が作る、こじらせラーメン店。新しいアイデアは大歓迎、でも流行には流されない。「これが好き」という確信だけを頼りに、今日も厨房に立っています。</div>
     </div>
   </div>
 </section>
@@ -854,8 +890,12 @@
       <span class="info-value">カウンター8席・テーブル4席</span>
     </div>
     <div class="info-row">
-      <span class="info-label">電話</span>
-      <span class="info-value">045-XXX-XXXX</span>
+      <span class="info-label">営業情報</span>
+      <span class="info-value">
+        <a href="https://x.com/" target="_blank" style="color:var(--cream);text-decoration:none;margin-right:16px;">X（Twitter）</a>
+        <a href="https://www.instagram.com/" target="_blank" style="color:var(--cream);text-decoration:none;">Instagram</a>
+        <br><span style="font-size:12px;opacity:0.5;">最新の営業情報はSNSでご確認ください</span>
+      </span>
     </div>
   </div>
   <div class="reveal reveal-delay-1">
@@ -869,15 +909,18 @@
 <div class="cta-banner">
   <div class="cta-text">
     <div class="cta-title">あなたの一杯が、待っています。</div>
-    <div class="cta-sub">混雑時はお電話でご確認ください</div>
+    <div class="cta-sub">営業情報はSNSで随時お知らせしています</div>
   </div>
-  <a href="tel:045-XXX-XXXX" class="cta-btn">電話で問い合わせる →</a>
+  <div style="display:flex;gap:12px;position:relative;z-index:1;">
+    <a href="https://x.com/" target="_blank" class="cta-btn">X をフォロー →</a>
+    <a href="https://www.instagram.com/" target="_blank" class="cta-btn">Instagram →</a>
+  </div>
 </div>
 
 <!-- フッター -->
 <footer>
-  <div class="footer-logo">shin</div>
-  <div class="footer-copy">© 2025 shin ramen. All rights reserved.</div>
+  <div class="footer-logo">SHIN</div>
+  <div class="footer-copy">© 2025 SHIN ramen. All rights reserved.</div>
 </footer>
 
 <script>
