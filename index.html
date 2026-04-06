@@ -1,0 +1,896 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>shin | 一杯に、魂を込めて。</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600;700;800&family=Zen+Kaku+Gothic+New:wght@300;400;500&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #FDF6ED;
+    --warm-white: #FAF4E8;
+    --orange: #E8621A;
+    --orange-light: #F07A3A;
+    --orange-deep: #C44E0E;
+    --forest: #2D4A2D;
+    --forest-light: #3D6B3D;
+    --charcoal: #1A1A18;
+    --warm-gray: #6B6558;
+    --gold: #C8973A;
+    --red-accent: #C0392B;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--cream);
+    color: var(--charcoal);
+    font-family: 'Zen Kaku Gothic New', sans-serif;
+    overflow-x: hidden;
+  }
+
+  /* ノイズテクスチャ */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.4;
+  }
+
+  /* ===== ナビ ===== */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 48px;
+    mix-blend-mode: multiply;
+  }
+
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    color: var(--cream);
+    text-shadow: 0 2px 20px rgba(0,0,0,0.3);
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 36px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-size: 13px;
+    letter-spacing: 0.12em;
+    color: var(--cream);
+    text-decoration: none;
+    font-weight: 400;
+    opacity: 0.9;
+    transition: opacity 0.2s;
+  }
+
+  .nav-links a:hover { opacity: 1; }
+
+  /* ===== ヒーロー ===== */
+  .hero {
+    min-height: 100vh;
+    background: var(--charcoal);
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 50% at 70% 40%, rgba(232,98,26,0.25) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 60% at 20% 80%, rgba(45,74,45,0.3) 0%, transparent 60%),
+      linear-gradient(160deg, #0E0E0C 0%, #1A1810 40%, #231E14 100%);
+  }
+
+  /* 蒸気アニメーション */
+  .steam {
+    position: absolute;
+    bottom: 200px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 20px;
+  }
+
+  .steam-line {
+    width: 2px;
+    height: 80px;
+    background: linear-gradient(to top, rgba(255,255,255,0.15), transparent);
+    border-radius: 2px;
+    animation: steamRise 3s ease-in-out infinite;
+  }
+
+  .steam-line:nth-child(2) { animation-delay: 0.8s; height: 60px; }
+  .steam-line:nth-child(3) { animation-delay: 1.6s; height: 70px; }
+
+  @keyframes steamRise {
+    0% { transform: translateY(0) scaleX(1); opacity: 0; }
+    20% { opacity: 1; }
+    100% { transform: translateY(-120px) scaleX(2); opacity: 0; }
+  }
+
+  /* 丼の図形 */
+  .bowl-shape {
+    position: absolute;
+    bottom: 60px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 160px;
+    height: 80px;
+    border: 2px solid rgba(232,98,26,0.4);
+    border-top: none;
+    border-radius: 0 0 80px 80px;
+    opacity: 0.6;
+  }
+
+  .bowl-shape::before {
+    content: '';
+    position: absolute;
+    top: -2px; left: -20px; right: -20px;
+    height: 20px;
+    border: 2px solid rgba(232,98,26,0.3);
+    border-bottom: none;
+    border-radius: 20px 20px 0 0;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    padding: 0 48px 80px;
+    max-width: 700px;
+  }
+
+  .hero-eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    color: var(--orange);
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 0.3s;
+  }
+
+  .hero-eyebrow::before {
+    content: '';
+    width: 32px;
+    height: 1px;
+    background: var(--orange);
+  }
+
+  .hero-title {
+    font-family: 'Shippori Mincho', serif;
+    font-size: clamp(56px, 8vw, 96px);
+    font-weight: 800;
+    line-height: 1.05;
+    color: var(--cream);
+    margin-bottom: 12px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 0.5s;
+  }
+
+  .hero-title span {
+    color: var(--orange);
+    font-style: italic;
+    font-family: 'Playfair Display', serif;
+    font-size: 0.7em;
+  }
+
+  .hero-sub {
+    font-size: 15px;
+    color: rgba(253,246,237,0.6);
+    letter-spacing: 0.08em;
+    line-height: 1.8;
+    margin-bottom: 40px;
+    font-weight: 300;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 0.7s;
+  }
+
+  .hero-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    background: var(--orange);
+    color: white;
+    padding: 16px 32px;
+    font-size: 13px;
+    letter-spacing: 0.15em;
+    text-decoration: none;
+    font-weight: 500;
+    transition: background 0.2s, transform 0.2s;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 0.9s;
+  }
+
+  .hero-cta:hover {
+    background: var(--orange-deep);
+    transform: translateX(4px);
+  }
+
+  .hero-cta::after {
+    content: '→';
+    font-size: 16px;
+  }
+
+  /* 右サイドの大きなテキスト */
+  .hero-vertical {
+    position: absolute;
+    right: 48px;
+    top: 50%;
+    transform: translateY(-50%) rotate(90deg);
+    transform-origin: center;
+    font-family: 'Shippori Mincho', serif;
+    font-size: 11px;
+    letter-spacing: 0.4em;
+    color: rgba(253,246,237,0.2);
+    white-space: nowrap;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ===== コンセプト ===== */
+  .concept {
+    background: var(--warm-white);
+    padding: 120px 48px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .concept::before {
+    content: '信';
+    position: absolute;
+    right: -40px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-family: 'Shippori Mincho', serif;
+    font-size: 320px;
+    font-weight: 800;
+    color: rgba(232,98,26,0.04);
+    line-height: 1;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  .concept-label {
+    font-size: 10px;
+    letter-spacing: 0.35em;
+    color: var(--orange);
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+
+  .concept-title {
+    font-family: 'Shippori Mincho', serif;
+    font-size: clamp(36px, 4vw, 52px);
+    font-weight: 700;
+    line-height: 1.4;
+    color: var(--charcoal);
+    margin-bottom: 28px;
+  }
+
+  .concept-text {
+    font-size: 15px;
+    line-height: 2;
+    color: var(--warm-gray);
+    font-weight: 300;
+  }
+
+  .concept-text + .concept-text {
+    margin-top: 16px;
+  }
+
+  .concept-visual {
+    position: relative;
+  }
+
+  .concept-card {
+    background: var(--charcoal);
+    padding: 48px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .concept-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0; right: 0;
+    width: 120px; height: 120px;
+    background: radial-gradient(circle, rgba(232,98,26,0.3), transparent 70%);
+  }
+
+  .concept-card-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 72px;
+    font-weight: 700;
+    color: rgba(232,98,26,0.2);
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+
+  .concept-card-title {
+    font-family: 'Shippori Mincho', serif;
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--cream);
+    margin-bottom: 12px;
+  }
+
+  .concept-card-body {
+    font-size: 13px;
+    color: rgba(253,246,237,0.5);
+    line-height: 1.8;
+    font-weight: 300;
+  }
+
+  /* ===== メニュー ===== */
+  .menu {
+    background: var(--charcoal);
+    padding: 120px 48px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .menu::before {
+    content: 'MENU';
+    position: absolute;
+    left: 0; top: 40px;
+    font-family: 'Playfair Display', serif;
+    font-size: 160px;
+    font-weight: 700;
+    color: rgba(255,255,255,0.02);
+    letter-spacing: -0.02em;
+    line-height: 1;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-bottom: 60px;
+  }
+
+  .section-label {
+    font-size: 10px;
+    letter-spacing: 0.35em;
+    color: var(--orange);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  .section-title {
+    font-family: 'Shippori Mincho', serif;
+    font-size: clamp(32px, 4vw, 48px);
+    font-weight: 700;
+    color: var(--cream);
+    line-height: 1.2;
+  }
+
+  .menu-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+  }
+
+  .menu-item {
+    background: rgba(255,255,255,0.03);
+    padding: 36px 28px;
+    border: 1px solid rgba(255,255,255,0.05);
+    transition: background 0.3s, border-color 0.3s;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .menu-item::before {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 2px;
+    background: var(--orange);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s;
+  }
+
+  .menu-item:hover {
+    background: rgba(232,98,26,0.06);
+    border-color: rgba(232,98,26,0.2);
+  }
+
+  .menu-item:hover::before {
+    transform: scaleX(1);
+  }
+
+  .menu-item.featured {
+    background: rgba(232,98,26,0.08);
+    border-color: rgba(232,98,26,0.25);
+  }
+
+  .menu-badge {
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    color: var(--orange);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    display: block;
+  }
+
+  .menu-name {
+    font-family: 'Shippori Mincho', serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--cream);
+    margin-bottom: 8px;
+  }
+
+  .menu-desc {
+    font-size: 12px;
+    color: rgba(253,246,237,0.4);
+    line-height: 1.7;
+    font-weight: 300;
+    margin-bottom: 20px;
+  }
+
+  .menu-price {
+    font-family: 'Playfair Display', serif;
+    font-size: 24px;
+    color: var(--gold);
+    font-weight: 700;
+  }
+
+  .menu-price span {
+    font-size: 13px;
+    color: rgba(200,151,58,0.6);
+    font-family: 'Zen Kaku Gothic New', sans-serif;
+    font-weight: 300;
+  }
+
+  /* ===== こだわり ===== */
+  .features {
+    background: var(--cream);
+    padding: 120px 48px;
+  }
+
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 40px;
+    margin-top: 60px;
+  }
+
+  .feature-item {
+    position: relative;
+    padding-top: 28px;
+    border-top: 1px solid rgba(26,26,24,0.1);
+  }
+
+  .feature-num {
+    position: absolute;
+    top: -20px;
+    left: 0;
+    font-family: 'Playfair Display', serif;
+    font-size: 48px;
+    font-weight: 700;
+    color: rgba(232,98,26,0.12);
+    line-height: 1;
+  }
+
+  .feature-title {
+    font-family: 'Shippori Mincho', serif;
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--charcoal);
+    margin-bottom: 12px;
+  }
+
+  .feature-body {
+    font-size: 13px;
+    line-height: 1.9;
+    color: var(--warm-gray);
+    font-weight: 300;
+  }
+
+  /* ===== 店舗情報 ===== */
+  .info {
+    background: var(--forest);
+    padding: 100px 48px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: start;
+  }
+
+  .info-title {
+    font-family: 'Shippori Mincho', serif;
+    font-size: 36px;
+    font-weight: 700;
+    color: var(--cream);
+    margin-bottom: 32px;
+  }
+
+  .info-row {
+    display: flex;
+    gap: 20px;
+    padding: 16px 0;
+    border-bottom: 1px solid rgba(253,246,237,0.1);
+    font-size: 14px;
+  }
+
+  .info-row:last-child { border-bottom: none; }
+
+  .info-label {
+    color: rgba(253,246,237,0.4);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    min-width: 80px;
+    padding-top: 2px;
+  }
+
+  .info-value {
+    color: var(--cream);
+    line-height: 1.8;
+    font-weight: 300;
+  }
+
+  .map-placeholder {
+    background: rgba(0,0,0,0.2);
+    height: 280px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(253,246,237,0.1);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .map-placeholder::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      repeating-linear-gradient(0deg, transparent, transparent 39px, rgba(255,255,255,0.03) 39px, rgba(255,255,255,0.03) 40px),
+      repeating-linear-gradient(90deg, transparent, transparent 39px, rgba(255,255,255,0.03) 39px, rgba(255,255,255,0.03) 40px);
+  }
+
+  .map-pin {
+    width: 16px;
+    height: 16px;
+    background: var(--orange);
+    border-radius: 50% 50% 50% 0;
+    transform: rotate(-45deg);
+    position: relative;
+    z-index: 1;
+    box-shadow: 0 0 0 4px rgba(232,98,26,0.3);
+  }
+
+  /* ===== CTA バナー ===== */
+  .cta-banner {
+    background: var(--orange);
+    padding: 72px 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cta-banner::before {
+    content: 'shin';
+    position: absolute;
+    right: 40px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-family: 'Playfair Display', serif;
+    font-size: 200px;
+    font-weight: 700;
+    color: rgba(255,255,255,0.08);
+    letter-spacing: -0.02em;
+    line-height: 1;
+  }
+
+  .cta-text {
+    position: relative;
+    z-index: 1;
+  }
+
+  .cta-title {
+    font-family: 'Shippori Mincho', serif;
+    font-size: 36px;
+    font-weight: 700;
+    color: white;
+    margin-bottom: 8px;
+  }
+
+  .cta-sub {
+    font-size: 14px;
+    color: rgba(255,255,255,0.7);
+    font-weight: 300;
+    letter-spacing: 0.05em;
+  }
+
+  .cta-btn {
+    position: relative;
+    z-index: 1;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    background: white;
+    color: var(--orange-deep);
+    padding: 18px 36px;
+    font-size: 13px;
+    letter-spacing: 0.15em;
+    text-decoration: none;
+    font-weight: 500;
+    white-space: nowrap;
+    transition: transform 0.2s;
+  }
+
+  .cta-btn:hover { transform: translateY(-2px); }
+
+  /* ===== フッター ===== */
+  footer {
+    background: var(--charcoal);
+    padding: 40px 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .footer-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--cream);
+    letter-spacing: 0.15em;
+  }
+
+  .footer-copy {
+    font-size: 11px;
+    color: rgba(253,246,237,0.3);
+    letter-spacing: 0.08em;
+  }
+
+  /* ===== スクロールアニメーション ===== */
+  .reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.3s; }
+
+  /* ===== モバイル ===== */
+  @media (max-width: 768px) {
+    nav { padding: 16px 20px; }
+    .nav-links { display: none; }
+    .hero-content { padding: 0 20px 60px; }
+    .hero-vertical { display: none; }
+    .concept { grid-template-columns: 1fr; padding: 72px 20px; gap: 48px; }
+    .menu { padding: 72px 20px; }
+    .menu-grid { grid-template-columns: 1fr; }
+    .features { padding: 72px 20px; }
+    .features-grid { grid-template-columns: 1fr; gap: 32px; }
+    .info { grid-template-columns: 1fr; padding: 72px 20px; gap: 40px; }
+    .cta-banner { flex-direction: column; padding: 56px 20px; }
+    footer { flex-direction: column; gap: 12px; padding: 28px 20px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ナビ -->
+<nav>
+  <div class="nav-logo">shin</div>
+  <ul class="nav-links">
+    <li><a href="#concept">こだわり</a></li>
+    <li><a href="#menu">メニュー</a></li>
+    <li><a href="#info">店舗情報</a></li>
+  </ul>
+</nav>
+
+<!-- ヒーロー -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="steam">
+    <div class="steam-line"></div>
+    <div class="steam-line"></div>
+    <div class="steam-line"></div>
+  </div>
+  <div class="bowl-shape"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">Artisan Ramen · 職人ラーメン</div>
+    <h1 class="hero-title">
+      一杯に、<br><span>魂</span>を込めて。
+    </h1>
+    <p class="hero-sub">
+      素材と向き合い、火と語らい、<br>
+      毎朝仕込む一杯があります。
+    </p>
+    <a href="#menu" class="hero-cta">メニューを見る</a>
+  </div>
+  <div class="hero-vertical">shin · 一杯に魂を込めて · artisan ramen · 横浜</div>
+</section>
+
+<!-- コンセプト -->
+<section class="concept" id="concept">
+  <div class="concept-left reveal">
+    <p class="concept-label">Our Concept</p>
+    <h2 class="concept-title">妥協しない素材と、<br>職人の技が宿る一杯。</h2>
+    <p class="concept-text">
+      北海道産の昆布と九州産の豚骨を丸一日かけて炊き出したスープ。
+      小麦の香りを活かした自家製麺。ひとつひとつ、手を抜かない。
+    </p>
+    <p class="concept-text">
+      それが「shin」の、変わらない約束です。
+    </p>
+  </div>
+  <div class="concept-visual reveal reveal-delay-2">
+    <div class="concept-card">
+      <div class="concept-card-num">01</div>
+      <div class="concept-card-title">毎朝5時からの仕込み</div>
+      <div class="concept-card-body">スープは毎日ゼロから。前日の残しは使わない。それがshinのルールです。</div>
+    </div>
+  </div>
+</section>
+
+<!-- メニュー -->
+<section class="menu" id="menu">
+  <div class="section-header">
+    <div>
+      <p class="section-label reveal">Our Menu</p>
+      <h2 class="section-title reveal reveal-delay-1">看板メニュー</h2>
+    </div>
+  </div>
+  <div class="menu-grid">
+    <div class="menu-item featured reveal">
+      <span class="menu-badge">Signature</span>
+      <div class="menu-name">醤油らーめん</div>
+      <div class="menu-desc">鶏ガラと昆布の二重出汁に、自家製醤油ダレ。透明感のある黄金色のスープ。</div>
+      <div class="menu-price">¥980 <span>税込</span></div>
+    </div>
+    <div class="menu-item reveal reveal-delay-1">
+      <span class="menu-badge">Popular</span>
+      <div class="menu-name">濃厚豚骨</div>
+      <div class="menu-desc">18時間炊き込んだ白濁スープ。クリーミーながら後味すっきり。</div>
+      <div class="menu-price">¥1,050 <span>税込</span></div>
+    </div>
+    <div class="menu-item reveal reveal-delay-2">
+      <span class="menu-badge">New</span>
+      <div class="menu-name">辣油つけ麺</div>
+      <div class="menu-desc">自家製辣油が香る濃厚つけ汁に、コシの強い太麺を合わせた一品。</div>
+      <div class="menu-price">¥1,150 <span>税込</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- こだわり -->
+<section class="features">
+  <p class="section-label reveal" style="color:var(--orange)">Our Commitment</p>
+  <h2 class="section-title reveal reveal-delay-1" style="color:var(--charcoal)">shinのこだわり</h2>
+  <div class="features-grid">
+    <div class="feature-item reveal reveal-delay-1">
+      <div class="feature-num">01</div>
+      <div class="feature-title">国産素材100%</div>
+      <div class="feature-body">野菜・肉・麦、すべて産地を確認した国産素材のみを使用。安全と美味しさの両立にこだわります。</div>
+    </div>
+    <div class="feature-item reveal reveal-delay-2">
+      <div class="feature-num">02</div>
+      <div class="feature-title">毎日手打ちの自家製麺</div>
+      <div class="feature-body">スープに合わせて製麺師が毎日打つ自家製麺。歯ごたえ・のど越しが別格です。</div>
+    </div>
+    <div class="feature-item reveal reveal-delay-3">
+      <div class="feature-num">03</div>
+      <div class="feature-title">添加物不使用</div>
+      <div class="feature-body">化学調味料・保存料は一切使用しません。素材本来のうまみだけで勝負します。</div>
+    </div>
+    <div class="feature-item reveal reveal-delay-1">
+      <div class="feature-num">04</div>
+      <div class="feature-title">完全無化調</div>
+      <div class="feature-body">化学調味料（MSG）を一切使わず、素材の旨みだけで深みのあるスープを実現。食べ終わった後の「くどさ」がありません。</div>
+    </div>
+    <div class="feature-item reveal reveal-delay-2">
+      <div class="feature-num">05</div>
+      <div class="feature-title">女性店主が作る、やさしい一杯</div>
+      <div class="feature-body">店主は女性。「女性やお子様にも気軽に入れるラーメン店を」という想いから生まれた、繊細で丁寧な味づくりが評判です。</div>
+    </div>
+  </div>
+</section>
+
+<!-- 店舗情報 -->
+<section class="info" id="info">
+  <div class="reveal">
+    <h2 class="info-title">店舗情報</h2>
+    <div class="info-row">
+      <span class="info-label">住所</span>
+      <span class="info-value">神奈川県横浜市中区××町1-2-3</span>
+    </div>
+    <div class="info-row">
+      <span class="info-label">営業時間</span>
+      <span class="info-value">11:00〜15:00 / 18:00〜22:00<br>（スープ切れ次第終了）</span>
+    </div>
+    <div class="info-row">
+      <span class="info-label">定休日</span>
+      <span class="info-value">火曜日</span>
+    </div>
+    <div class="info-row">
+      <span class="info-label">席数</span>
+      <span class="info-value">カウンター8席・テーブル4席</span>
+    </div>
+    <div class="info-row">
+      <span class="info-label">電話</span>
+      <span class="info-value">045-XXX-XXXX</span>
+    </div>
+  </div>
+  <div class="reveal reveal-delay-1">
+    <div class="map-placeholder">
+      <div class="map-pin"></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTAバナー -->
+<div class="cta-banner">
+  <div class="cta-text">
+    <div class="cta-title">あなたの一杯が、待っています。</div>
+    <div class="cta-sub">混雑時はお電話でご確認ください</div>
+  </div>
+  <a href="tel:045-XXX-XXXX" class="cta-btn">電話で問い合わせる →</a>
+</div>
+
+<!-- フッター -->
+<footer>
+  <div class="footer-logo">shin</div>
+  <div class="footer-copy">© 2025 shin ramen. All rights reserved.</div>
+</footer>
+
+<script>
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      observer.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.12 });
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
